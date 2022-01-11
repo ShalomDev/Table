@@ -1,11 +1,37 @@
-import React , {useState, useEffect} from "react";
+import React , {useState} from "react";
 import './App.css';
 import data from './mock-data.json';
 
 
 const App = () => {
 const [contacts, setContacts] = useState(data.courses);
+const [addFormData, setAddformData] = useState({
+  name:'',
+  code:'',
+  overview:'',
+  duration:'',
+  startDate:'',
+  time:'',
+  deliveryMode:'',
+  price:'',
+  totalSlot:'',
+  bookedSlots:'',
+  dateCreated:''
 
+})
+
+const handleAddFormChange = (event) => {
+  event.preventDefault(); 
+  
+  const fieldName = event.target.getAttribute('name'); /* Gets name of the input the user has changed. Whicch then asiigns it to the fieldName variable*/
+  const fieldValue = event.target.value; /* gets value the user has entered into the input*/
+
+  const newFormData = { ...addFormData }; /* Make a copy of the existing form data so that we can make changes to it by mutating the state */
+  newFormData[fieldName] = fieldValue;
+
+  setAddformData(newFormData);
+
+}
   return ( <div className= "app-container">
   <table>
     
@@ -45,11 +71,12 @@ const [contacts, setContacts] = useState(data.courses);
   </table>
   <h2> Form to add a contact </h2>
        <form>
-           <input 
+<input 
            type= "text"
            name= "name"
            required="required"
            placeholder = "Enter a name..."
+           onChange={handleAddFormChange}
             />
 
 <input 
@@ -57,7 +84,8 @@ const [contacts, setContacts] = useState(data.courses);
            name= "code"
            required="required"
            placeholder = "Enter the code..."
-            />
+           onChange={handleAddFormChange}
+           />
 
 
 <input 
@@ -65,6 +93,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "overview"
            required="required"
            placeholder = "Any Comments..."
+           onChange={handleAddFormChange}
             />
 
  <input 
@@ -72,6 +101,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "duration"
            required="required"
            placeholder = "Enter a duraction..."
+           onChange={handleAddFormChange}
             />
 
 <input 
@@ -79,6 +109,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "startDate"
            required="required"
            placeholder = "Enter a startDate..."
+           onChange={handleAddFormChange}
             />
 
 <input 
@@ -86,6 +117,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "time"
            required="required"
            placeholder = "Enter time..."
+           onChange={handleAddFormChange}
             />
 
 
@@ -94,6 +126,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "deliveryMode"
            required="required"
            placeholder = "Enter deliveryMode..."
+           onChange={handleAddFormChange}
             />
 
 <input 
@@ -101,6 +134,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "price"
            required="required"
            placeholder = "Enter the price..."
+           onChange={handleAddFormChange}
             />
 
 
@@ -109,6 +143,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "totalSlots"
            required="required"
            placeholder = "Enter totalSlots..."
+           onChange={handleAddFormChange}
             />
 
 
@@ -117,6 +152,7 @@ const [contacts, setContacts] = useState(data.courses);
            name= "bookedSlots"
            required="required"
            placeholder = "Enter bookedSlots..."
+           onChange={handleAddFormChange}
             />
 
 <input 
@@ -124,10 +160,11 @@ const [contacts, setContacts] = useState(data.courses);
            name= "dateCreated"
            required="required"
            placeholder = "Enter date..."
+           onChange={handleAddFormChange}
             />
-<br/>
+
 <button type = "submit"> Add </button>
-       </form>
+       </form>       
     </div>
 );    
 };
